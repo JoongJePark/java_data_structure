@@ -3,20 +3,23 @@ public class Stack {
     private int stackSize;
     private char[] stackArr;
 
-    public Stack(int stackSize){
+    public Stack(int stackSize) {
         top = -1;
         this.stackSize = stackSize;
-        stackArr =new char[this.stackSize];
+        stackArr = new char[this.stackSize];
     }
+
     boolean isEmpty() {
-        return (top==-1);
+        return (top == -1);
     }
+
     boolean isFull() {
-        return (top==stackSize-1);
+        return (top == stackSize - 1);
     }
+
     void push(char data) {
-        if(!(this.isFull())){
-            stackArr[top+1] = data;
+        if (!(this.isFull())) {
+            stackArr[top + 1] = data;
             top += 1;
         } else {
             System.out.println("스택이 꽉 찼습니다. 데이터를 넣을 수 없습니다.");
