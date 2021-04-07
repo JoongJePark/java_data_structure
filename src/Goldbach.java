@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 public class Goldbach {
     public boolean prime(int n) {
@@ -14,14 +13,22 @@ public class Goldbach {
         return true;
     }
 
+    public static boolean compare_data(int[] input_array, int input_data) {
+        for (int num : input_array) {
+            if (num == input_data)
+                return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
-        int n = 100;
+        int n = 10000;
         int[] gold = new int[n];
         int[] prime = new int[n];
         int nOfPrime = 0;
         boolean[] check = new boolean[n + 1];
         for (int i = 2; i < n; i++) {
-            if (check[i] == false) {
+            if (!check[i]) {
                 prime[nOfPrime] = i;
                 nOfPrime += 1;
                 for (int j = 2; i * j < n; j++) {
@@ -29,14 +36,17 @@ public class Goldbach {
                 }
             }
         }
-        for (int j = 3; j < n; j++) {
-            for (int i : prime) {
-                if (IntStream.of(prime).anyMatch(x -> x == j - i)) {
-                    gold[j] = i;
+        for (int i = 2; i * 2 < n; i++) {
+            for (int j : prime) {
+                if (compare_data(prime, 2 * i - j)) {
+                    gold[i] = j;
+                    System.out.println(2*i);
+                    System.out.println(j);
+                    break;
                 }
             }
         }
-        System.out.println(Arrays.toString(prime));
+        System.out.println(Arrays.toString(gold));
 
 
     }
